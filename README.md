@@ -1,6 +1,6 @@
 # News Article Classifier App
 
-This is a web application that classifies news articles into different categories such as sports, business, politics, tech, and entertainment. The app is built using Flask and Jinja and runs using Gunicorn. It utilizes a Scraper service to scrape articles using Beautiful Soup and a machine learning model built with scikit-learn to perform the classification. The entire application is hosted on DigitalOcean at http://174.138.122.86:5000/
+This is a web application that classifies news articles into different categories such as sports, business, politics, tech, and entertainment. The app is built using Flask and Jinja and runs using Gunicorn. It utilizes a Scraper service to scrape articles using Beautiful Soup and a machine learning model built with scikit-learn to perform the classification. The entire application is hosted on DigitalOcean at http://128.199.22.154 using Nginx.
 
 ## Installation
 
@@ -112,6 +112,12 @@ This News Article Classifier App is designed to be hosted on DigitalOcean. To ho
 
    ```
    gunicorn main:app
+   ```
+9. Install Nginx
+   ```
+    sudo apt install nginx
+    sudo systemctl enable nginx
+    sudo systemctl start nginx
    ```
 
 9. Access the app in your web browser using the IP address or domain name of your DigitalOcean Droplet.

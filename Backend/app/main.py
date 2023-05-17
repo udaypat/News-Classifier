@@ -2,9 +2,9 @@ from flask import Flask, request, jsonify
 from scraper import scrape
 import pickle
 
-import os
+# import os
 
-print(os.getcwd())
+# print(os.getcwd())
 
 
 # Load the saved model and vectorizer

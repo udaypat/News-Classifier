@@ -1,9 +1,10 @@
 <template>
     <div>
         <div id="heading">
-            <h1>Smart Support</h1>
+            <h1>Predction</h1>
         </div>
     </div>
+    <button type="button" class="btn btn-primary">Primary</button>
 </template>
   
 <script>

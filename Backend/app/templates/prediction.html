@@ -48,9 +48,23 @@
                             <label for="articleUrl">Enter Article URL:</label>
                             <input type="url" class="form-control" name="url" required>
                         </div>
-                        <button type="submit" class="btn btn-primary">Submit</button>
+
+                        <button type="submit" class="btn btn-primary" id="liveAlertBtn">Submit</button>
+
+                        <!-- <button type="submit" class="btn btn-success">Submit</button> -->
+
+
                     </form>
-                    <!-- <h2>{{ category }}</h2> -->
+                    <!-- <div id="liveAlertPlaceholder"></div> -->
+
+                    {% if category %}
+
+                    <div class="alert alert-info m-3" role="alert">
+
+                        <h5 class="text-center m-2">This article classifies as {{category}}
+                        </h5>
+                    </div>
+                    {% endif %}
                 </div>
             </div>
         </div>
@@ -86,5 +100,8 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/js/bootstrap.bundle.min.js"></script>
 </body>
+<script>
+
+</script>
 
 </html>

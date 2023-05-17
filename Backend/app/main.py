@@ -6,13 +6,13 @@ from flask_cors import CORS
 from flask import redirect, render_template, request, url_for
 
 
-model_path = r"C:\Users\nitro\Documents\IIC\KYRO Assignment\Backend\app\model.pkl"
+model_path = r"/home/Backend/app/model.pkl"
 
 # Load the saved model and vectorizer
 with open(model_path, "rb") as file:
     naive_bayes = pickle.load(file)
 
-vector_path = r"C:\Users\nitro\Documents\IIC\KYRO Assignment\Backend\app\vectorizer.pkl"
+vector_path = r"/home/Backend/app/vectorizer.pkl"
 
 with open(vector_path, "rb") as file:
     vectorizer = pickle.load(file)
@@ -38,7 +38,7 @@ def home():
 
 
 def get_all():
-    print("getting list")
+    
     all_preds = Prediction.query.order_by(Prediction.id.desc()).all()
 
     preds_list = []
@@ -53,7 +53,7 @@ def get_all():
 def predicition():
     if request.method == "GET":
         pred_list = get_all()
-        return render_template("prediction.html", pred_list=pred_list)
+        return render_template("prediction.html", pred_list=pred_list,flag=0)
     else:
         # Get the text from the request
         req = request.form["url"]
@@ -70,7 +70,7 @@ def predicition():
         pred_list = get_all()
 
         return render_template(
-            "prediction.html", category=predicted_category[0], pred_list=pred_list
+            "prediction.html", category=predicted_category[0], pred_list=pred_list,flag=1
         )
 
         # # Return the predicted category as JSON response

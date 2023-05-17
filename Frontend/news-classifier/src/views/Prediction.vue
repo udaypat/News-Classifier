@@ -1,6 +1,8 @@
 <template>
     <head>
-        <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+        <!-- <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests"> -->
+        <meta name="referrer" content="unsafe-url" />
+
     </head>
     <div class="container">
         <h1>Prediction Page</h1>

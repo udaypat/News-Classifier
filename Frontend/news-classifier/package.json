@@ -8,6 +8,7 @@
   },
   "dependencies": {
     "bootstrap": "^5.2.3",
+    "sweetalert": "^2.1.2",
     "vue": "^3.2.13",
     "vue-router": "^4.0.3"
   },

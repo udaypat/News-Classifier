@@ -2,6 +2,10 @@ from flask import Flask, request, jsonify
 from scraper import scrape
 import pickle
 
+import os
+
+print(os.getcwd())
+
 
 # Load the saved model and vectorizer
 with open("model.pkl", "rb") as file:

@@ -1,4 +1,7 @@
 <template>
+    <head>
+        <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+    </head>
     <div class="container">
         <h1>Prediction Page</h1>
         <form @submit.prevent="submitUrl">

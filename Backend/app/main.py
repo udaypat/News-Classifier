@@ -3,6 +3,8 @@ from scraper import scrape
 import pickle
 from flask_sqlalchemy import SQLAlchemy
 from flask_cors import CORS
+from flask import redirect, render_template, request, url_for
+
 
 model_path = r"C:\Users\nitro\Documents\IIC\KYRO Assignment\Backend\app\model.pkl"
 
@@ -30,35 +32,51 @@ class Prediction(db.Model):
     prediction = db.Column(db.String(200))
 
 
-@app.get("/history")
+@app.get("/")
+def home():
+    return render_template("home.html")
+
+
 def get_all():
-    all_preds = Prediction.query.all()
+    print("getting list")
+    all_preds = Prediction.query.order_by(Prediction.id.desc()).all()
 
     preds_list = []
     for pred in all_preds:
         pred_data = {"id": pred.id, "url": pred.url, "Category": pred.prediction}
         preds_list.append(pred_data)
-    return jsonify(preds_list)
+
+    return preds_list
 
 
-@app.post("/predict")
-def predict():
-    # Get the text from the request
-    req = request.get_json()
-    text = scrape(req["url"])
+@app.route("/predict", methods=["GET", "POST"])
+def predicition():
+    if request.method == "GET":
+        pred_list = get_all()
+        return render_template("prediction.html", pred_list=pred_list)
+    else:
+        # Get the text from the request
+        req = request.form["url"]
 
-    # Vectorize the text
-    text_vectorized = vectorizer.transform([text])
+        text = scrape(req)
 
-    # Predict the category for the text
-    predicted_category = naive_bayes.predict(text_vectorized)
+        # # Vectorize the text
+        text_vectorized = vectorizer.transform([text])
 
-    # Return the predicted category as JSON response
-    response = {"predicted_category": predicted_category[0]}
+        # # Predict the category for the text
+        predicted_category = naive_bayes.predict(text_vectorized)
+        add_to_history(req, predicted_category[0])
 
-    add_to_history(req["url"], predicted_category[0])
+        pred_list = get_all()
 
-    return jsonify(response)
+        return render_template(
+            "prediction.html", category=predicted_category[0], pred_list=pred_list
+        )
+
+        # # Return the predicted category as JSON response
+        # response = {"predicted_category": predicted_category[0]}
+
+        # return redirect(url_for("predicition"))
 
 
 def add_to_history(url, predction):
@@ -69,4 +87,4 @@ def add_to_history(url, predction):
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run()

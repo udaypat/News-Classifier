@@ -77,7 +77,7 @@ export default {
                 body: `{"url":"${this.articleUrl}"}`
             };
 
-            fetch('http://64.227.158.87/predict', options)
+            fetch('http://localhost:5000/predict', options)
                 .then(response => response.json())
                 .then(response => {
                     console.log(response)
@@ -101,7 +101,7 @@ export default {
         get_history() {
             const options = { method: 'GET' };
 
-            fetch('http://64.227.158.87/history', options)
+            fetch('http://localhost:5000/history', options)
                 .then(response => response.json())
                 .then(response => this.classificationHistory = response)
                 .catch(err => console.error(err));

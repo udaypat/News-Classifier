@@ -22,23 +22,24 @@ app = Flask(__name__)
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///database.sqlite3"
 
 CORS(app)
-# SQLite database file path
 db.init_app(app)
 
 
+# DataBase Model
 class Prediction(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     url = db.Column(db.String(200), nullable=False)
     prediction = db.Column(db.String(200))
 
 
+# Home Page
 @app.get("/")
 def home():
     return render_template("home.html")
 
 
+# Get List of all previous urls
 def get_all():
-    
     all_preds = Prediction.query.order_by(Prediction.id.desc()).all()
 
     preds_list = []
@@ -49,11 +50,12 @@ def get_all():
     return preds_list
 
 
+# Predict category for an article
 @app.route("/predict", methods=["GET", "POST"])
 def predicition():
     if request.method == "GET":
         pred_list = get_all()
-        return render_template("prediction.html", pred_list=pred_list,flag=0)
+        return render_template("prediction.html", pred_list=pred_list, flag=0)
     else:
         # Get the text from the request
         req = request.form["url"]
@@ -70,15 +72,11 @@ def predicition():
         pred_list = get_all()
 
         return render_template(
-            "prediction.html", category=predicted_category[0], pred_list=pred_list,flag=1
+            "prediction.html", category=predicted_category[0], pred_list=pred_list
         )
 
-        # # Return the predicted category as JSON response
-        # response = {"predicted_category": predicted_category[0]}
 
-        # return redirect(url_for("predicition"))
-
-
+# Store url in data base
 def add_to_history(url, predction):
     db.session.add(
         Prediction(url=url, prediction=predction),

@@ -49,7 +49,7 @@ export default {
                 body: `{"url":"${this.articleUrl}"}`
             };
 
-            fetch('https://64.227.158.87/predict', options)
+            fetch('64.227.158.87/predict', options)
                 .then(response => response.json())
                 .then(response => {
                     this.predictedCategory = response['predicted_category']

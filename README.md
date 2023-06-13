@@ -1,7 +1,6 @@
 # News Article Classifier App
 
-This is a web application that classifies news articles into different categories such as sports, business, politics, tech, and entertainment. The app is built using Flask and Jinja and runs using Gunicorn. It utilizes a Scraper service to scrape articles using Beautiful Soup and a machine learning model built with scikit-learn to perform the classification. The entire application is hosted on DigitalOcean at http://128.199.22.154 using Nginx.
-
+This is a web application that classifies news articles into different categories such as sports, business, politics, tech, and entertainment. The app is built using Flask and Jinja and runs using Gunicorn. It utilizes a Scraper service to scrape articles using Beautiful Soup and a machine learning model built with scikit-learn to perform the classification.
 ## Installation
 
 To install and run the News Article Classifier App on your local machine, follow these steps:

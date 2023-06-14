@@ -1,26 +1,23 @@
-from flask import Flask, request, jsonify
-from scraper import scrape
 import pickle
-from flask_sqlalchemy import SQLAlchemy
+
+from flask import Flask, jsonify, redirect, render_template, request, url_for
 from flask_cors import CORS
-from flask import redirect, render_template, request, url_for
+from flask_sqlalchemy import SQLAlchemy
+from scraper import scrape
 
-
-model_path = r"/home/Backend/app/model.pkl"
-
-# Load the saved model and vectorizer
-with open(model_path, "rb") as file:
+# Load the saved model
+with open("model.pkl", "rb") as file:
     naive_bayes = pickle.load(file)
 
-vector_path = r"/home/Backend/app/vectorizer.pkl"
-
-with open(vector_path, "rb") as file:
+# Load the saved vectorizer
+with open("vectorizer.pkl", "rb") as file:
     vectorizer = pickle.load(file)
 
+
+# Flask Configs
 db = SQLAlchemy()
 app = Flask(__name__)
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///database.sqlite3"
-
 CORS(app)
 db.init_app(app)
 
@@ -60,6 +57,7 @@ def predicition():
         # Get the text from the request
         req = request.form["url"]
 
+        # Scrape the article
         text = scrape(req)
 
         # # Vectorize the text

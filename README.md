@@ -17,19 +17,13 @@ This is a web application that classifies news articles into different categorie
 
 ### Using docker
 
-1. Clone the repository from GitHub:
+1. Build the container:
 
    ```
-   git clone https://github.com/udaypat/News-Classifier.git
+   docker build https://github.com/udaypat/News-Classifier.git -t news-classifier
    ```
 
-2. Build the container:
-
-   ```
-   docker build -t news-classifier .
-   ```
-
-3. Run the container:
+2. Run the container:
 
    ```
    docker run -p 8000:8000 news-classifier

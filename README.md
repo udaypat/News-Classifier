@@ -1,9 +1,43 @@
+# Table of Contents
+
+* [Introduction](#news-article-classifier-app)
+* [Installation](#installation)
+   + [Using docker 🐋](#using-docker)
+   + [Manual Install](#manual-install)
+* [Project Structure](#project-structure)
+* [Usage](#usage)
+* [Hosting on Linux with Nginx](#hosting-on-linux-with-nginx)
+
+
 # News Article Classifier App
 
 This is a web application that classifies news articles into different categories such as sports, business, politics, tech, and entertainment. The app is built using Flask and Jinja and runs using Gunicorn. It utilizes a Scraper service to scrape articles using Beautiful Soup and a machine learning model built with scikit-learn to perform the classification.
+
 ## Installation
 
-To install and run the News Article Classifier App on your local machine, follow these steps:
+### Using docker
+
+1. Clone the repository from GitHub:
+
+   ```
+   git clone https://github.com/udaypat/News-Classifier.git
+   ```
+
+2. Build the container:
+
+   ```
+   docker build -t news-classifier .
+   ```
+
+3. Run the container:
+
+   ```
+   docker run -p 8000:8000 news-classifier
+   ```
+
+### Manual Install
+
+To install it manually and run the News Article Classifier App on your local machine, follow these steps:
 
 1. Clone the repository from GitHub:
 
@@ -66,22 +100,22 @@ All <p> tags were extrated, If there was no <p> tags Plain text was extracted.
 
 6. App will store previous results in a database and will show a list after prediction. 
 
-## Hosting on DigitalOcean
+## Hosting on Linux with Nginx
 
-This News Article Classifier App is designed to be hosted on DigitalOcean. To host the app on DigitalOcean, follow these steps:
+This News Article Classifier App is designed to be hosted on Linux. To host the app on Linux, follow these steps:
 
-1. Create a Droplet on DigitalOcean with your preferred specifications and operating system.
+1. Create a Droplet on DigitalOcean with your preferred specifications and operating system or use your own system.
 
 2. SSH into your Droplet.
     ```
    ssh root@ip
    ```
   
-3. 
-  ```
-  sudo apt update
-  sudo apt install python3-pip
-  ```
+3. Run
+   ```
+   sudo apt update
+   sudo apt install python3-pip
+   ```
 
 4. Clone the repository onto your Droplet:
 

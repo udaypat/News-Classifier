@@ -68,6 +68,8 @@ def predicition():
 
         # # Predict the category for the text
         predicted_category = naive_bayes.predict(text_vectorized)
+
+        # add to database
         add_to_history(req, predicted_category[0])
 
         pred_list = get_all()

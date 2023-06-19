@@ -1,10 +1,7 @@
-import requests
-from bs4 import BeautifulSoup
 import re
 
-
-# URL of the website you want to scrape
-# url = "https://timesofindia.indiatimes.com/business/india-business/jio-bp-kicks-off-price-war-with-super-diesel/articleshow/100288620.cms"
+import requests
+from bs4 import BeautifulSoup
 
 
 def scrape(url):
@@ -22,6 +19,7 @@ def scrape(url):
 
     result_string = " ".join(paragraphs)
 
+    # remove any characters in the text that are not alphabets, digits, or spaces.
     if len(result_string) <= 50:
         result_string = re.sub(r"[^a-zA-Z0-9 ]+", "", soup.get_text())
 
@@ -29,8 +27,5 @@ def scrape(url):
     with open("paragraph.txt", "w", encoding="utf-8") as file:
         file.write(result_string)
 
-    # Print the resulting string
+    # return the resulting string
     return result_string
-
-
-# print(scrape(url))

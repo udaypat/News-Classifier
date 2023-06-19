@@ -1,8 +1,8 @@
 import pickle
 
-from flask import Flask, jsonify, redirect, render_template, request, url_for
+from flask import Flask, render_template, request
 from flask_cors import CORS
-from flask_sqlalchemy import SQLAlchemy
+from models import Prediction, db
 from scraper import scrape
 
 # Load the saved model
@@ -15,24 +15,10 @@ with open("vectorizer.pkl", "rb") as file:
 
 
 # Flask Configs
-db = SQLAlchemy()
 app = Flask(__name__)
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///database.sqlite3"
 CORS(app)
 db.init_app(app)
-
-
-# DataBase Model
-class Prediction(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    url = db.Column(db.String(200), nullable=False)
-    prediction = db.Column(db.String(200))
-
-
-# Home Page
-@app.get("/")
-def home():
-    return render_template("home.html")
 
 
 # Get List of all previous urls
@@ -45,6 +31,23 @@ def get_all():
         preds_list.append(pred_data)
 
     return preds_list
+
+
+# Store url in data base
+def add_to_history(url, predction):
+    db.session.add(
+        Prediction(url=url, prediction=predction),
+    )
+    db.session.commit()
+
+
+# Controllers
+
+
+# Home Page
+@app.get("/")
+def home():
+    return render_template("home.html")
 
 
 # Predict category for an article
@@ -72,14 +75,6 @@ def predicition():
         return render_template(
             "prediction.html", category=predicted_category[0], pred_list=pred_list
         )
-
-
-# Store url in data base
-def add_to_history(url, predction):
-    db.session.add(
-        Prediction(url=url, prediction=predction),
-    )
-    db.session.commit()
 
 
 if __name__ == "__main__":

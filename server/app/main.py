@@ -5,6 +5,8 @@ from flask_cors import CORS
 from models import Prediction, db
 from scraper import scrape
 
+# Deployed at https://udayp.live
+
 # Load the saved model
 with open("model.pkl", "rb") as file:
     naive_bayes = pickle.load(file)

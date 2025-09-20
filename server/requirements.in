@@ -1,0 +1,9 @@
+beautifulsoup4==4.12.2
+Flask==2.3.2
+Flask_Cors==3.0.10
+flask_sqlalchemy==3.0.3
+Requests==2.31.0
+scikit-learn==1.2.2
+gunicorn==20.1.0
+numpy==1.26.3
+pandas

@@ -1,4 +1,4 @@
-FROM python:3.9-alpine
+FROM python:3.9-slim
 
 
 ENV UV_SYSTEM_PYTHON=1
@@ -11,14 +11,11 @@ COPY . /news-classifier/
 WORKDIR /news-classifier/server
 
 
-RUN apk add --no-cache \
-    build-base \
-    gfortran \
-    lapack-dev \
-    blas-dev \
-    linux-headers \
+RUN apt-get update && apt-get install -y --no-install-recommends \
     curl \
-    ca-certificates
+    ca-certificates \
+    build-essential \
+    gfortran 
 
 # Install uv
 ADD https://astral.sh/uv/install.sh /uv-installer.sh

@@ -1,13 +1,12 @@
 # Table of Contents
 
-* [Introduction](#news-article-classifier-app)
-* [Installation](#installation)
-   + [Using docker 🐋](#using-docker)
-   + [Manual Install](#manual-install)
-* [Project Structure](#project-structure)
-* [Usage](#usage)
-* [Hosting on Linux with Nginx](#hosting-on-linux-with-nginx)
-
+- [Introduction](#news-article-classifier-app)
+- [Installation](#installation)
+  - [Using docker 🐋](#using-docker)
+  - [Manual Install](#manual-install)
+- [Project Structure](#project-structure)
+- [Usage](#usage)
+- [Hosting on Linux with Nginx](#hosting-on-linux-with-nginx)
 
 # News Article Classifier App
 
@@ -52,11 +51,10 @@ To install it manually and run the News Article Classifier App on your local mac
    ```
 
 4. To train the model again:
-    ```
-    cd predictor
-    jupyter nbconvert --execute classify.ipyb
-    ```
-    
+   ```
+   cd predictor
+   jupyter nbconvert --execute classify.ipyb
+   ```
 5. To start the Flask application:
 
    ```
@@ -66,25 +64,28 @@ To install it manually and run the News Article Classifier App on your local mac
 
 6. Access the app in your web browser at `http://localhost:5000`.
 
+### Lock Dependencies
+
+uv pip compile --universal requirements.in -o requirements.txt
+
 ## Project Structure
 
-1. The ML model was trained on bbc-news dataset. -  https://storage.googleapis.com/dataset-uploader/bbc/bbc-text.csv
+1. The ML model was trained on bbc-news dataset. - https://storage.googleapis.com/dataset-uploader/bbc/bbc-text.csv
 
 2. After removing stopwords the accurcay was measured of different classifiers.
 
 3. Trained model was dumped using pickle and use by a flask endpoint to make prediction.
 
-4. Scraping of data was done using BeautifulSoup. 
-All <p> tags were extrated, If there was no <p> tags Plain text was extracted.
- 
-5. On basis of that new predicitons were made and stored in the Sqlite Database.  
- 
+4. Scraping of data was done using BeautifulSoup.
+   All <p> tags were extrated, If there was no <p> tags Plain text was extracted.
+
+5. On basis of that new predicitons were made and stored in the Sqlite Database.
 
 ## Usage
 
 1. Open the News Article Classifier App in your web browser.
 
-2. On the homepage, you will find a button which will redirect  you where can enter the URL of a news article.
+2. On the homepage, you will find a button which will redirect you where can enter the URL of a news article.
 
 3. Enter the URL of the article you want to classify and click the "Classify" button.
 
@@ -92,7 +93,7 @@ All <p> tags were extrated, If there was no <p> tags Plain text was extracted.
 
 5. Once the classification is complete, the app will display the predicted category of the article on the result page.
 
-6. App will store previous results in a database and will show a list after prediction. 
+6. App will store previous results in a database and will show a list after prediction.
 
 ## Hosting on Linux with Nginx
 
@@ -101,11 +102,13 @@ This News Article Classifier App is designed to be hosted on Linux. To host the 
 1. Create a Droplet on DigitalOcean with your preferred specifications and operating system or use your own system.
 
 2. SSH into your Droplet.
-    ```
+
+   ```
    ssh root@ip
    ```
-  
+
 3. Run
+
    ```
    sudo apt update
    sudo apt install python3-pip
@@ -120,7 +123,7 @@ This News Article Classifier App is designed to be hosted on Linux. To host the 
 5. Navigate to the project directory:
 
    ```
-   cd 
+   cd
    ```
 
 6. Install the required dependencies using pip:
@@ -140,12 +143,13 @@ This News Article Classifier App is designed to be hosted on Linux. To host the 
    ```
    gunicorn main:app
    ```
+
 9. Install Nginx
+
    ```
     sudo apt install nginx
     sudo systemctl enable nginx
     sudo systemctl start nginx
    ```
 
-9. Access the app in your web browser using the IP address or domain name of your DigitalOcean Droplet.
-
+10. Access the app in your web browser using the IP address or domain name of your DigitalOcean Droplet.

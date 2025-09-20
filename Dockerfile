@@ -11,7 +11,14 @@ COPY . /news-classifier/
 WORKDIR /news-classifier/server
 
 
-RUN apk add --no-cache curl gcc musl-dev libffi-dev bash
+RUN apk add --no-cache \
+    build-base \
+    gfortran \
+    lapack-dev \
+    blas-dev \
+    linux-headers \
+    curl \
+    ca-certificates
 
 # Install uv
 ADD https://astral.sh/uv/install.sh /uv-installer.sh
